@@ -22,7 +22,6 @@ A multi-Platform multi-Functional Tool writte in C++
  [s2b](#d2h---base64dec) | Convert string to binary | 
  [base64Enc](#d2h---base64dec) | Encode a base64 string | 
  [base64Dec](#d2h---base64dec) | Decode a base64 string | 
- |
 
 # Options
 
@@ -34,7 +33,6 @@ A multi-Platform multi-Functional Tool writte in C++
  'n' | use numbers | 
  's' | use special characters | 
  'rx' | create x Passwords | 
-| 
 
 Usage: 
     ```mt Pw [options] [length]```
@@ -44,7 +42,6 @@ Usage:
  1 password with the length of 20 | ```mt Pw``` | 
  12 passwords with the length of 50 | ```mt Pw r12 50``` | 
  2 number-only passwords with the length of 4 | ```mt Pw nr2 4``` | 
-| 
 
 ## Num
 Usage:
@@ -55,7 +52,6 @@ Usage:
  Number between 1 and 10 | ```mt Num``` | 
  Number between 1 and 100 | ```mt Num 100``` | 
  Number between -10 and 0 | ```mt Num -10 0``` | 
-|
 
 ## Name
 | Option | Usage |
@@ -66,7 +62,6 @@ Usage:
  'ry'| create y usernames |
  'my' | set minimum length to y |
  'xy' | set maximum length to y |
-|
 
 Usage:
     ```mt Name [options] [path]```
@@ -76,7 +71,6 @@ Usage:
  Name with a minimum length of 3 and maximum length of 20 |```mt Name```
  4 uppercase names with a minimum length of 20 and maximum length of 50 | ```mt Name ur4m20x50``` |
  2 names using 'firstList.txt' and 'secondList.txt' saved at 'C:\\' | ```mt Name r2 "C:\"``` |
-|
 
 ## d2h - base64Dec
 Usage: 
@@ -87,4 +81,3 @@ Examples:
 | -- | -- |
  Convert 5 to hex | ```mt d2h 5``` |
  Decode base64 string | ```mt base64Dec aHR0cHM6Ly9naXRodWIuY29tL2phbHVwYWph``` |
-|
