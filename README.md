@@ -9,7 +9,6 @@ A multi-Platform multi-Functional Tool writte in C++
  [Pw](#pw)   | Show a random password | 
  [Num](#num) | Show a pseudorandom number | 
  [Name](#name) | Show a random username | 
- | 
  [d2h](#d2h---base64dec) | Convert decimal to hex |  
  [d2b](#d2h---base64dec) | Convert decimal to binary | 
  [d2c](#d2h---base64dec) | Convert decimal to character | 

@@ -8,7 +8,6 @@
 
 const std::string DEFAULTPATH = "Resources/";
 
-
 void outputPw(std::string, std::string);
 std::string randomPw(bool, bool, bool, bool, int);
 
