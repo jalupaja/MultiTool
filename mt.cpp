@@ -64,9 +64,18 @@ int main (int argc, const char *argv[])
     else if (!strcmp(argv[1], "Num") || !strcmp(argv[1], "num"))
     {
         srand((uintmax_t)std::hash<std::thread::id>()(std::this_thread::get_id()));
-        if (argc > 3) std::cout << randomNum(string2Num(argv[2]), string2Num(argv[3])) << "\n";
-        else if (argc > 2) std::cout << randomNum(1, string2Num(argv[2])) << "\n";
-        else std::cout << randomNum(1, 10) << "\n";
+        if (argc > 3) 
+        {
+            std::cout << randomNum(string2Num(argv[2]), string2Num(argv[3])) << "\n";
+        }
+        else if (argc > 2) 
+        {
+            std::cout << randomNum(1, string2Num(argv[2])) << "\n";
+        }
+        else 
+        {
+            std::cout << randomNum(1, 10) << "\n";
+        }
     }
     else if (!strcmp(argv[1], "Name") || !strcmp(argv[1], "name") || !strcmp(argv[1], "n"))
     {
@@ -659,25 +668,28 @@ long system2Num(std::string hex, int system)
     }
     return out;
 }
- 
+
 void helpOutput()
 {
-    std::cout << "Known options:\n";
-    std::cout << "help\tShow this output\n";
-    std::cout << "Pw\tShow a random password\n";
-    std::cout << "Num\tShow a pseudorandom number\n";
-    std::cout << "Name\tShow a random username\n";
-    std::cout << "d2h\tConvert decimal to hex\n";
-    std::cout << "d2b\tConvert decimal to binary\n";
-    std::cout << "d2c\tConvert decimal to character\n";
-    std::cout << "h2d\tConvert hex to decimal\n";
-    std::cout << "h2b\tConvert hex to binary\n";
-    std::cout << "h2s\tConvert hex to string\n";
-    std::cout << "b2d\tConvert binary to decimal\n";
-    std::cout << "b2h\tConvert binary to hex\n";
-    std::cout << "b2c\tConvert binary to character\n";
-    std::cout << "s2h\tConvert string to hex\n";
-    std::cout << "s2b\tConvert string to binary\n";
+    std::cout << "Known functions:\n";
+    std::cout << "help\t\tShow this output\n";
+    std::cout << "Pw\t\tShow a random password\n";
+    std::cout << "Num\t\tShow a pseudorandom number\n";
+    std::cout << "Name\t\tShow a random username\n";
+    std::cout << "d2h\t\tConvert decimal to hex\n";
+    std::cout << "d2b\t\tConvert decimal to binary\n";
+    std::cout << "d2c\t\tConvert decimal to character\n";
+    std::cout << "h2d\t\tConvert hex to decimal\n";
+    std::cout << "h2b\t\tConvert hex to binary\n";
+    std::cout << "h2s\t\tConvert hex to string\n";
+    std::cout << "b2d\t\tConvert binary to decimal\n";
+    std::cout << "b2h\t\tConvert binary to hex\n";
+    std::cout << "b2c\t\tConvert binary to character\n";
+    std::cout << "s2h\t\tConvert string to hex\n";
+    std::cout << "s2b\t\tConvert string to binary\n";
     std::cout << "base64Enc\tEncode a base64 string\n";
     std::cout << "base64Dec\tDecode a base64 string\n";
+
+
+    std::cout << "\nMore settings on: https://github.com/jalupaja/MultiTool\n";
 }
