@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdint.h>
 #include <iostream>
+#include <time.h>
 #include <cstring>
 #include <thread>
 #include <vector>
@@ -10,8 +12,6 @@ const std::string DEFAULTPATH = "Resources/";
 
 void outputPw(std::string, std::string);
 std::string randomPw(bool, bool, bool, bool, int);
-
-long randomNum(long, long);
 
 void outputName(std::string, std::string);
 std::string randomName(char, std::vector<std::string>, std::vector<std::string>, int, int);
@@ -33,12 +33,14 @@ std::string base64Dec(std::string);
 
 long string2Num(std::string);
 long system2Num(std::string, int);
-void helpOutput();
 
+void newSeed();
+long randomNum(long, long);
+
+void helpOutput();
 
 int main (int argc, const char *argv[])
 {
-    
     if (argc == 1)
     {
         helpOutput();
@@ -46,7 +48,7 @@ int main (int argc, const char *argv[])
     }
     else if (!strcmp(argv[1], "Pw") || !strcmp(argv[1], "pw") || !strcmp(argv[1], "p"))
     {
-        srand((uintmax_t)std::hash<std::thread::id>()(std::this_thread::get_id()));
+        newSeed();
         if (argc > 3)
         {
             outputPw(argv[2], argv[3]);
@@ -62,7 +64,7 @@ int main (int argc, const char *argv[])
     }
     else if (!strcmp(argv[1], "Num") || !strcmp(argv[1], "num"))
     {
-        srand((uintmax_t)std::hash<std::thread::id>()(std::this_thread::get_id()));
+        newSeed();
         if (argc > 3) 
         {
             std::cout << randomNum(string2Num(argv[2]), string2Num(argv[3])) << "\n";
@@ -78,7 +80,7 @@ int main (int argc, const char *argv[])
     }
     else if (!strcmp(argv[1], "Name") || !strcmp(argv[1], "name") || !strcmp(argv[1], "n"))
     {
-        srand((uintmax_t)std::hash<std::thread::id>()(std::this_thread::get_id()));
+        newSeed();
         if (argc > 3)
         {
             outputName(argv[2], argv[3]);
@@ -319,13 +321,6 @@ std::string randomPw(bool useLower, bool useUpper, bool useNum, bool useSpec, in
         output += alphabet[randomNum(0, alphabet.length() -1 )];
     }
     return output;
-}
-
-long randomNum(long min, long max)
-{
-    if (min>max) return 0;
-    else if (min==max) return min;
-    return (rand() % (max-min)) + min; 
 }
 
 std::vector<std::string> setupVector(std::string filePath)
@@ -666,6 +661,17 @@ long system2Num(std::string hex, int system)
         }
     }
     return out;
+}
+
+void newSeed()
+{
+    srand((uintmax_t)std::hash<std::thread::id>()(std::this_thread::get_id()) / (uintmax_t)time(NULL));
+}
+long randomNum(long min, long max)
+{
+    if (min>max) return 0;
+    else if (min==max) return min;
+    return min + (long) (max * (rand() / (RAND_MAX + 1.0)));
 }
 
 void helpOutput()
