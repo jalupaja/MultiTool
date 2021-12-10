@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <stdint.h>
 #include <iostream>
+#include <algorithm>
 #include <time.h>
 #include <cstring>
 #include <thread>
@@ -27,6 +28,14 @@ void b2h(std::string);
 void b2s(std::string);
 void s2h(std::string);
 void s2b(std::string);
+
+int strLen(std::string);
+std::string strUpper(std::string);
+std::string strLower(std::string);
+std::string strRev(std::string);
+void strSplitNum(std::string, int);
+void strSplitChar(std::string, std::string);
+std::string strRem(std::string, std::string);
 
 std::string base64Enc(std::string);
 std::string base64Dec(std::string);
@@ -247,6 +256,95 @@ int main (int argc, const char *argv[])
             std::cout << "\n";
         }
     }
+    else if (!strcmp(argv[1], "sLen") || !strcmp(argv[1], "slen"))
+    {
+        if (argc > 2) 
+        {
+            for (int i = 2; i < argc; i++)
+            {
+                std::cout << strLen(argv[i]) << " ";
+            }
+            std::cout << "\n";
+        }
+        else
+            std::cout << "0\n";
+    }
+    else if (!strcmp(argv[1], "sUpper") || !strcmp(argv[1], "supper") || !strcmp(argv[1], "su"))
+    {
+        if (argc > 2) 
+        {
+            for (int i = 2; i < argc; i++)
+            {
+                std::cout << strUpper(argv[i]) << " ";
+            }
+            std::cout << "\n";
+        }
+    }
+    else if (!strcmp(argv[1], "sLower") || !strcmp(argv[1], "slower") || !strcmp(argv[1], "sl"))
+    {
+        if (argc > 2) 
+        {
+            for (int i = 2; i < argc; i++)
+            {
+                std::cout << strLower(argv[i]) << " ";
+            }
+            std::cout << "\n";
+        }
+    }
+    else if (!strcmp(argv[1], "sRev") || !strcmp(argv[1], "srev") || !strcmp(argv[1], "sr"))
+    {
+        if (argc > 2) 
+        {
+            for (int i = 2; i < argc; i++)
+            {
+                std::cout << strRev(argv[i]) << " ";
+            }
+            std::cout << "\n";
+        }
+    }
+    else if (!strcmp(argv[1], "sSplitNum") || !strcmp(argv[1], "ssplitnum") || !strcmp(argv[1], "ssn"))
+    {
+        if (argc > 3) 
+        {
+            if (string2Num(argv[3]) > string2Num(argv[2]))
+                strSplitNum(argv[2], string2Num(argv[3]));
+            else
+                strSplitNum(argv[3], string2Num(argv[2]));
+        }
+        else if (argc > 2)
+        {
+            strSplitNum(argv[2], (std::string(argv[2]).length() / 4));
+        }
+    }
+    else if (!strcmp(argv[1], "sSplitChar") || !strcmp(argv[1], "ssplitchar") || !strcmp(argv[1], "ssc"))
+    {
+        if (argc > 3) 
+        {
+            if (argv[2][0] == '-')
+                strSplitChar(argv[3], std::string(argv[2]).substr(2));
+            else if (argv[3][0] == '-')
+                strSplitChar(argv[2], std::string(argv[3]).substr(2));
+            else
+                strSplitChar(argv[2], argv[3]);
+        }
+        else if (argc > 2)
+        {
+            strSplitChar(argv[2], " ");
+        }
+    }
+    else if (!strcmp(argv[1], "sRem") || !strcmp(argv[1], "srem"))
+    {
+        if (argc > 3) 
+        {
+            if (argv[2][0] == '-')
+                strRem(argv[3], std::string(argv[2]).substr(2));
+            else if (argv[3][0] == '-')
+                strRem(argv[2], std::string(argv[3]).substr(2));
+            else
+                strRem(argv[2], (argv[3]));
+            std::cout << "\n";
+        }
+    }
     else
     {
         helpOutput();
@@ -256,6 +354,7 @@ int main (int argc, const char *argv[])
     return EXIT_SUCCESS;
 }
 
+//PASSWORD STUFF
 void outputPw(std::string options, std::string maxLengthInput)
 {
     bool useLower = false, useUpper = false, useNum = false, useSpec = false;
@@ -323,6 +422,7 @@ std::string randomPw(bool useLower, bool useUpper, bool useNum, bool useSpec, in
     return output;
 }
 
+//NAME STUFF
 std::vector<std::string> setupVector(std::string filePath)
 {
     std::vector<std::string> finishedVector;
@@ -433,6 +533,7 @@ std::string randomName(char option, std::vector<std::string> firstWord, std::vec
     return one + two;
 }
 
+//DECIMAL, HEX, BINARY, STRING CONVERSION
 void outputIntHex(int input)
 {
     std::ios::fmtflags cFlags(std::cout.flags());
@@ -538,20 +639,21 @@ void s2b(std::string str)
     }
 }
 
-static const char* B64chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
-static const int B64index[256] =
-{
-    0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
-    0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
-    0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  62, 63, 62, 62, 63,
-    52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 0,  0,  0,  0,  0,  0,
-    0,  0,  1,  2,  3,  4,  5,  6,  7,  8,  9,  10, 11, 12, 13, 14,
-    15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 0,  0,  0,  0,  63,
-    0,  26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40,
-    41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51
-};
+//BASE64 STUFF
 const std::string b64encode(const void* data, const size_t &len)
 {//source: https://stackoverflow.com/questions/180947/base64-decode-snippet-in-c
+    const char* B64chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+    const int B64index[256] =
+    {
+        0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
+        0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
+        0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  62, 63, 62, 62, 63,
+        52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 0,  0,  0,  0,  0,  0,
+        0,  0,  1,  2,  3,  4,  5,  6,  7,  8,  9,  10, 11, 12, 13, 14,
+        15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 0,  0,  0,  0,  63,
+        0,  26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40,
+        41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51
+    };
     std::string result((len + 2) / 3 * 4, '=');
     unsigned char *p = (unsigned  char*) data;
     char *str = &result[0];
@@ -577,6 +679,18 @@ const std::string b64encode(const void* data, const size_t &len)
 }
 const std::string b64decode(const void* data, const size_t &len)
 {//source: https://stackoverflow.com/questions/180947/base64-decode-snippet-in-c
+    const char* B64chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+    const int B64index[256] =
+    {
+        0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
+        0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
+        0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  62, 63, 62, 62, 63,
+        52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 0,  0,  0,  0,  0,  0,
+        0,  0,  1,  2,  3,  4,  5,  6,  7,  8,  9,  10, 11, 12, 13, 14,
+        15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 0,  0,  0,  0,  63,
+        0,  26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40,
+        41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51
+    };
     if (len == 0) return "";
 
     unsigned char *p = (unsigned char*) data;
@@ -613,6 +727,97 @@ std::string base64Enc(std::string str)
 std::string base64Dec(std::string str)
 {
     return b64decode(str.c_str(), str.size());
+}
+
+//STRING STUFF
+int strLen(std::string str)
+{
+    return str.length();
+}
+std::string strUpper(std::string str)
+{
+    for (int i = 0; i < str.length(); i++)
+    {
+        str[i] = toupper(str[i]);
+    }
+    return str;
+}
+std::string strLower(std::string str)
+{
+    for (int i = 0; i < str.length(); i++)
+    {
+        str[i] = tolower(str[i]);
+    }
+    return str;
+}
+std::string strRev(std::string str)
+{
+    std::string tmp = str;
+    for (int i = 0; i < str.length(); i++)
+        tmp[(str.length() -1 -i)] = str[i];
+    str = tmp;
+    return str;
+}
+void strSplitNum(std::string str, int maxLen)
+{//!!! core dumped (out of bounds)
+    do
+    {
+        int toIndex = 0;
+        if (str.length() <= maxLen)
+        {
+            toIndex = str.length() -1;
+        }
+        else
+        {
+            int testfor = ((maxLen/2) > 10) ? 10 : (maxLen/2);
+            for (int i = (maxLen -1); i > (maxLen -1 -testfor); i--)
+            {
+                if (i < 0) break;
+                if (str[i] == ' ' || str[i] == '\n' || str[i] == '\t' || str[i] == '-')
+                {
+                    toIndex = (maxLen -1 -i);
+                    break;
+                }
+            }
+            if (toIndex == 0) toIndex = (maxLen -1);
+        }
+        std::cout << str.substr(0, toIndex) << "\n";
+        if (toIndex +1 != str.length()) str = str.substr(toIndex+1);
+        else break;
+    } while (str.length() > 0);
+}
+void strSplitChar(std::string str, std::string chars)
+{//!!!
+    
+    do
+    {
+        int toIndex = 0;
+        for (int i = 0; i < str.length(); i++)
+        {
+            for (int j = 0; j < chars.length(); j++)
+            {
+                if (str[i] == chars[j])
+                {
+                    toIndex = i;
+                    break;
+                }
+            }
+            if (toIndex != 0) break;
+        }
+        if (toIndex == 0)
+        {
+            toIndex = str.length() -1;
+        }
+        std::cout << str.substr(0, toIndex-1) << "\n";
+        if (toIndex +1 != str.length()) str = str.substr(toIndex+1);
+        else break;
+    } while (str.length() > 0);
+}
+std::string strRem(std::string str, std::string chars)//!!! empty string
+{//source: https://stackoverflow.com/questions/20326356/how-to-remove-all-the-occurrences-of-a-char-in-c-string
+    for (int i = 0; i < chars.length(); i++)
+        str.erase(std::remove(str.begin(), str.end(), chars[i]), str.end());
+    return str;
 }
 
 long string2Num(std::string input)
@@ -694,7 +899,13 @@ void helpOutput()
     std::cout << "s2b\t\tConvert string to binary\n";
     std::cout << "base64Enc\tEncode a base64 string\n";
     std::cout << "base64Dec\tDecode a base64 string\n";
-
+    std::cout << "sLen\t\tGet string length\n";
+    std::cout << "sUpper\t\tConvert string to only uppercase\n";
+    std::cout << "sLower\t\tConvert string to only lowercase\n";
+    std::cout << "sRev\t\tReverse string\n";/*
+    std::cout << "sSplitNum\tSplit string after maximum length\n";
+    std::cout << "sSplitChar\tSplit string after specific characters\n";
+    std::cout << "sRem\t\tRemove Specific characters of string\n";*/
 
     std::cout << "\nMore settings on: https://github.com/jalupaja/MultiTool\n";
 }
