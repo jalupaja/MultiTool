@@ -36,6 +36,7 @@ std::string strRev(std::string);
 void strSplitNum(std::string, int);
 void strSplitChar(std::string, std::string);
 std::string strRem(std::string, std::string);
+void sFont(std::string);
 
 std::string base64Enc(std::string);
 std::string base64Dec(std::string);
@@ -342,6 +343,17 @@ int main (int argc, const char *argv[])
                 strRem(argv[2], std::string(argv[3]).substr(2));
             else
                 strRem(argv[2], (argv[3]));
+            std::cout << "\n";
+        }
+    }
+    else if (!strcmp(argv[1], "sFont") || !strcmp(argv[1], "sfont"))
+    {
+        if (argc > 2) 
+        {
+            for (int i = 2; i < argc; i++)
+            {
+                std::cout << sFont(argv[i]) << " ";
+            }
             std::cout << "\n";
         }
     }
@@ -819,6 +831,10 @@ std::string strRem(std::string str, std::string chars)//!!! empty string
         str.erase(std::remove(str.begin(), str.end(), chars[i]), str.end());
     return str;
 }
+void sFont(std::string str)
+{
+
+}
 
 long string2Num(std::string input)
 {
@@ -905,7 +921,8 @@ void helpOutput()
     std::cout << "sRev\t\tReverse string\n";/*
     std::cout << "sSplitNum\tSplit string after maximum length\n";
     std::cout << "sSplitChar\tSplit string after specific characters\n";
-    std::cout << "sRem\t\tRemove Specific characters of string\n";*/
+    std::cout << "sRem\t\tRemove Specific characters of string\n";
+    std::cout << "sFont\t\tConvert string to weird Font\n*/
 
     std::cout << "\nMore settings on: https://github.com/jalupaja/MultiTool\n";
 }
