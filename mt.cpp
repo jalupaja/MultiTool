@@ -334,15 +334,16 @@ int main (int argc, const char *argv[])
     {
         if (argc > 3) 
         {
-            if (string2Num(argv[3]) > string2Num(argv[2]))
-                strSplitNum(argv[2], string2Num(argv[3]));
-            else
+            if (std::string(argv[3]).length() > std::string(argv[2]).length())
                 strSplitNum(argv[3], string2Num(argv[2]));
+            else
+                strSplitNum(argv[2], string2Num(argv[3]));
         }
         else if (argc > 2)
         {
             strSplitNum(argv[2], (std::string(argv[2]).length() / 4));
         }
+        std::cout << std::string(argv[3]).length() << ":" << std::string(argv[2]).length();
     }
     else if (!strcmp(argv[1], "sSplitChar") || !strcmp(argv[1], "ssplitchar") || !strcmp(argv[1], "ssc"))
     {
@@ -825,6 +826,10 @@ void strTimes(std::string str, int times)
 }
 void strSplitNum(std::string str, int len)
 {
+    if (len < 1) {
+        std::cout << str;
+        return;
+    }
     int from = 0;
     for (int i = 0; i < (str.length() / len); i++){
         std::cout << str.substr(from, len) << "\n";
