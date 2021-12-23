@@ -29,8 +29,8 @@ A multi-Platform multi-Functional Tool writte in C++
  [sTiems](#stimes) | Output string multiple times |
  [sSplitNum](#ssplitnum) | Split string after maximum length |
  [sSplitChar](#ssplitchar) | Split string at specific character(s) |
- [(sRem)](#srem) | Remove Specific characters of string |
- [(sFont)](#sfont) | Convert string to weird font |
+ [sRem](#srem) | Remove Specific characters of string |
+ [sFont](#sfont) | Convert string to weird font |
 
 # Options
 
@@ -102,9 +102,41 @@ Examples:
  Output abcabc | ```mt sTimes abc 2``` |
 
 ## sSplitNum
+Usage:
+    ```mt sSplitNum [input] [after]```
+
+Examples:
+| Example | howto |
+| -- | -- |
+ Split "abcdefg" after every 2 characters | ```mt sSplitNum abcdefg 2``` |
 
 ## sSplitChar
+Usage:
+    ```mt sSplitChar [input] -[characters]```
+
+Examples:
+| Example | howto |
+| -- | -- |
+ Split "ababcb" at 'a' and 'c' -> "b b b" | ```mt sSplitChar ababcb -ac``` |
+ Split "abab" before 'a' -> " ab ab" | ```mt sSplitChar ababcb -!a``` |
+ Split "abab" after 'a' -> "a ba b" | ```mt sSplitChar ababcb -a!``` |
 
 ## sRem
+Usage:
+    ```mt sRem [input] -[characters]```
+
+Examples:
+| Example | howto |
+| -- | -- |
+ Remove 'a' and 'c' of "ababcb" -> "bbb" | ```mt sRem ababcb -ac``` |
 
 ## sFont
+Usage:
+    ```mt sFont [input] -[level]```
+
+Examples:
+| Example | howto |
+| -- | -- |
+ Create weird font at lowest level | ```mt sFont ababcb -1``` |
+ Create weird font at mid level | ```mt sFont ababcb -2``` |
+ Create weird font at highest level | ```mt sFont ababcb -3``` |

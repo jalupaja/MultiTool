@@ -39,7 +39,7 @@ void strSplitChar(std::string, std::string);
 void strSplitBeforeChar(std::string, std::string);
 void strSplitAfterChar(std::string, std::string);
 std::string strRem(std::string, std::string);
-void sFont(std::string);
+void strFont(std::string, int);
 
 std::string base64Enc(std::string);
 std::string base64Dec(std::string);
@@ -295,7 +295,7 @@ int main (int argc, const char *argv[])
             std::cout << "\n";
         }
     }
-    else if (!strcmp(argv[1], "sRev") || !strcmp(argv[1], "srev") || !strcmp(argv[1], "sr"))
+    else if (!strcmp(argv[1], "sRev") || !strcmp(argv[1], "srev"))
     {
         if (argc > 2) 
         {
@@ -376,29 +376,32 @@ int main (int argc, const char *argv[])
             strSplitChar(argv[2], " ");
         }
     }
-    else if (!strcmp(argv[1], "sRem") || !strcmp(argv[1], "srem"))
+    else if (!strcmp(argv[1], "sRem") || !strcmp(argv[1], "srem") || !strcmp(argv[1], "sr"))
     {
         if (argc > 3) 
         {
             if (argv[2][0] == '-')
-                strRem(argv[3], std::string(argv[2]).substr(2));
+                std::cout << strRem(argv[3], std::string(argv[2]).substr(1));
             else if (argv[3][0] == '-')
-                strRem(argv[2], std::string(argv[3]).substr(2));
+                std::cout << strRem(argv[2], std::string(argv[3]).substr(1));
             else
-                strRem(argv[2], (argv[3]));
+                std::cout << strRem(argv[2], argv[3]);
             std::cout << "\n";
         }
     }
     else if (!strcmp(argv[1], "sFont") || !strcmp(argv[1], "sfont"))
     {
-        if (argc > 2) 
-        {
-            for (int i = 2; i < argc; i++)
-            {
-                sFont(argv[i]);
-                std::cout << " ";
-            }
-            std::cout << "\n";
+        newSeed();
+        if (argc > 3) {
+            if (argv[2][0] == '-')
+                strFont(argv[3], string2Num(std::string(argv[2]).substr(1)));
+            else if (argv[3][0] == '-')
+                strFont(argv[2], string2Num(std::string(argv[3]).substr(1)));
+            else
+                strFont(argv[2], string2Num(argv[3]));
+
+        } else if (argc > 2) {
+            strFont(argv[2], 0);
         }
     }
     else
@@ -935,9 +938,69 @@ std::string strRem(std::string str, std::string chars)//!!! empty string
         str.erase(std::remove(str.begin(), str.end(), chars[i]), str.end());
     return str;
 }
-void sFont(std::string str)
+std::string strMemeFont(std::string str)
 {
-
+    for (int i = 0; i < str.length(); i++) {
+        if (rand() % 2) 
+            str[i] = toupper(str[i]);
+        else
+            str[i] = tolower(str[i]);
+    }
+    return str;
+}
+std::string strNumberFont(std::string str)
+{
+    for (int i = 0; i < str.length(); i++) {
+        if (!(rand() % 3)) continue;
+        switch (str[i]) {
+            case 'a':
+            case 'A':
+                str[i] = '4';
+                break;
+            case 'b':
+            case 'B':
+                str[i] = '8';
+                break;
+            case 'e':
+            case 'E':
+                str[i] = '3';
+                break;
+            case 'g':
+            case 'G':
+                str[i] = '6';
+                break;
+            case 'i':
+            case 'I':
+                str[i] = '1';
+                break;
+            case 'o':
+            case 'O':
+                str[i] = '0';
+                break;
+            case 's':
+            case 'S':
+                str[i] = '5';
+                break;
+            case 'z':
+            case 'Z':
+                str[i] = '2';
+                break;
+            default:
+                break;
+        }
+    }
+    return str;
+}
+void strFont(std::string str, int level)
+{
+    if (level == 1) {
+        std::cout << strMemeFont(str);
+    } else if (level == 2) {
+        std::cout << strNumberFont(str);
+    } else {
+        std::cout << strNumberFont(strMemeFont(str));
+    }
+    std::cout << "\n";
 }
 
 long string2Num(std::string input)
@@ -1025,9 +1088,9 @@ void helpOutput()
     std::cout << "sRev\t\tReverse string\n";
     std::cout << "sTimes\t\tOutput string multiple times\n";
     std::cout << "sSplitNum\tSplit string after maximum length\n";
-    std::cout << "sSplitChar\tSplit string at specific character(s)\n";/*
+    std::cout << "sSplitChar\tSplit string at specific character(s)\n";
     std::cout << "sRem\t\tRemove Specific characters of string\n";
-    std::cout << "sFont\t\tConvert string to weird font\n*/
+    std::cout << "sFont\t\tConvert string to weird font\n";
 
     std::cout << "\nMore settings on: https://github.com/jalupaja/MultiTool\n";
 }
