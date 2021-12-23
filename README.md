@@ -118,8 +118,8 @@ Examples:
 | Example | howto |
 | -- | -- |
  Split "ababcb" at 'a' and 'c' -> "b b b" | ```mt sSplitChar ababcb -ac``` |
- Split "abab" before 'a' -> " ab ab" | ```mt sSplitChar ababcb -!a``` |
- Split "abab" after 'a' -> "a ba b" | ```mt sSplitChar ababcb -a!``` |
+ Split "abab" before 'a' -> " ab ab" | ```mt sSplitChar ababcb -=a``` |
+ Split "abab" after 'a' -> "a ba b" | ```mt sSplitChar ababcb -a=``` |
 
 ## sRem
 Usage:

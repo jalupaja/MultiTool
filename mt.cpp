@@ -350,23 +350,23 @@ int main (int argc, const char *argv[])
         if (argc > 3) 
         {
             if (argv[2][0] == '-') {
-                if (argv[2][1] == '!')
+                if (argv[2][1] == '=')
                     strSplitBeforeChar(argv[3], std::string(argv[2]).substr(2));
-                else if (argv[2][std::string(argv[2]).length() - 1] == '!')
+                else if (argv[2][std::string(argv[2]).length() - 1] == '=')
                     strSplitAfterChar(argv[3], std::string(argv[2]).substr(1, std::string(argv[2]).length() - 2));
                 else
                     strSplitChar(argv[3], std::string(argv[2]).substr(1));
             } else if (argv[3][0] == '-') {
-                if (argv[3][1] == '!')
+                if (argv[3][1] == '=')
                     strSplitBeforeChar(argv[2], std::string(argv[3]).substr(2));
-                else if (argv[3][std::string(argv[3]).length() - 1] == '!')
+                else if (argv[3][std::string(argv[3]).length() - 1] == '=')
                     strSplitAfterChar(argv[2], std::string(argv[3]).substr(1, std::string(argv[3]).length() - 2));
                 else
                     strSplitChar(argv[2], std::string(argv[3]).substr(1));
             } else {
-                if (argv[3][0] == '!')
+                if (argv[3][0] == '=')
                     strSplitBeforeChar(argv[2], std::string(argv[3]).substr(1));
-                else if (argv[3][std::string(argv[3]).length() - 1] == '!')
+                else if (argv[3][std::string(argv[3]).length() - 1] == '=')
                     strSplitAfterChar(argv[2], std::string(argv[3]).substr(0, std::string(argv[3]).length() - 1));
                 else
                     strSplitChar(argv[2], argv[3]);
