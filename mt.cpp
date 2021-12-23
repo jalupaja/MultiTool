@@ -803,7 +803,16 @@ void strTimes(std::string str, int times)
         std::cout << str;
     std::cout << "\n";
 }
-void strSplitNum(std::string str, int maxLen)
+void strSplitNum(std::string str, int len)
+{
+    int from = 0;
+    for (int i = 0; i < (str.length() / len); i++){
+        std::cout << str.substr(from, len) << "\n";
+        from += len;
+    }
+    if (str.length() % len) std::cout << str.substr(from, str.length() -1);
+}
+void strSplitNumARCHIVE(std::string str, int maxLen)
 {//!!! core dumped (out of bounds)
     do
     {
@@ -952,8 +961,8 @@ void helpOutput()
     std::cout << "sUpper\t\tConvert string to only uppercase\n";
     std::cout << "sLower\t\tConvert string to only lowercase\n";
     std::cout << "sRev\t\tReverse string\n";
-    std::cout << "sTimes\t\tOutput string multiple times\n";/*
-    std::cout << "sSplitNum\tSplit string after maximum length\n";
+    std::cout << "sTimes\t\tOutput string multiple times\n";
+    std::cout << "sSplitNum\tSplit string after maximum length\n";/*
     std::cout << "sSplitChar\tSplit string after specific characters\n";
     std::cout << "sRem\t\tRemove Specific characters of string\n";
     std::cout << "sFont\t\tConvert string to weird Font\n*/
