@@ -36,6 +36,8 @@ std::string strRev(std::string);
 void strTimes(std::string, int);
 void strSplitNum(std::string, int);
 void strSplitChar(std::string, std::string);
+void strSplitBeforeChar(std::string, std::string);
+void strSplitAfterChar(std::string, std::string);
 std::string strRem(std::string, std::string);
 void sFont(std::string);
 
@@ -346,12 +348,28 @@ int main (int argc, const char *argv[])
     {
         if (argc > 3) 
         {
-            if (argv[2][0] == '-')
-                strSplitChar(argv[3], std::string(argv[2]).substr(2));
-            else if (argv[3][0] == '-')
-                strSplitChar(argv[2], std::string(argv[3]).substr(2));
-            else
-                strSplitChar(argv[2], argv[3]);
+            if (argv[2][0] == '-') {
+                if (argv[2][1] == '!')
+                    strSplitBeforeChar(argv[3], std::string(argv[2]).substr(2));
+                else if (argv[2][std::string(argv[2]).length() - 1] == '!')
+                    strSplitAfterChar(argv[3], std::string(argv[2]).substr(1, std::string(argv[2]).length() - 2));
+                else
+                    strSplitChar(argv[3], std::string(argv[2]).substr(1));
+            } else if (argv[3][0] == '-') {
+                if (argv[3][1] == '!')
+                    strSplitBeforeChar(argv[2], std::string(argv[3]).substr(2));
+                else if (argv[3][std::string(argv[3]).length() - 1] == '!')
+                    strSplitAfterChar(argv[2], std::string(argv[3]).substr(1, std::string(argv[3]).length() - 2));
+                else
+                    strSplitChar(argv[2], std::string(argv[3]).substr(1));
+            } else {
+                if (argv[3][0] == '!')
+                    strSplitBeforeChar(argv[2], std::string(argv[3]).substr(1));
+                else if (argv[3][std::string(argv[3]).length() - 1] == '!')
+                    strSplitAfterChar(argv[2], std::string(argv[3]).substr(0, std::string(argv[3]).length() - 1));
+                else
+                    strSplitChar(argv[2], argv[3]);
+            }
         }
         else if (argc > 2)
         {
@@ -798,7 +816,6 @@ std::string strRev(std::string str)
 }
 void strTimes(std::string str, int times)
 {
-    std::cout << times << ":" << str << "!\n";
     for (int i = 0; i < times; i++)
         std::cout << str;
     std::cout << "\n";
@@ -840,7 +857,52 @@ void strSplitNumARCHIVE(std::string str, int maxLen)
         else break;
     } while (str.length() > 0);
 }
+bool charsInChar(char chr, std::string chars)
+{
+    for (int i = 0; i < chars.length(); i++)
+    {
+        if (chr == chars[i]){
+            return true;
+        }
+    }
+    return false;
+}
 void strSplitChar(std::string str, std::string chars)
+{
+    int from, to = 0;
+    while (true){
+        for (from = to; to < str.length(); to++){
+            if (charsInChar(str[to], chars)) break;
+        }
+        std::cout << str.substr(from, to - from) << "\n";
+        if (++to >= str.length()) break;
+    }
+}
+void strSplitBeforeChar(std::string str, std::string chars)
+{
+    int from, to = 0;
+     while (true) {
+        for (from = to; to < str.length(); to++){
+            if (charsInChar(str[to], chars)) break;
+        }
+        if (from == 0) std::cout << str.substr(from, to - from) << "\n";
+        else std::cout << str.substr(from - 1, to - from + 1) << "\n";
+        if (to++ >= str.length()) break;
+    }
+}
+void strSplitAfterChar(std::string str, std::string chars)
+{
+
+    int from, to = 0;
+     while (true) {
+        for (from = to; to < str.length(); to++){
+            if (charsInChar(str[to], chars)) break;
+        }
+        std::cout << str.substr(from, ++to - from) << "\n";
+        if (to >= str.length()) break;
+    }
+}
+void strSplitCharARCHIVE(std::string str, std::string chars)
 {//!!!
     
     do
@@ -962,10 +1024,10 @@ void helpOutput()
     std::cout << "sLower\t\tConvert string to only lowercase\n";
     std::cout << "sRev\t\tReverse string\n";
     std::cout << "sTimes\t\tOutput string multiple times\n";
-    std::cout << "sSplitNum\tSplit string after maximum length\n";/*
-    std::cout << "sSplitChar\tSplit string after specific characters\n";
+    std::cout << "sSplitNum\tSplit string after maximum length\n";
+    std::cout << "sSplitChar\tSplit string at specific character(s)\n";/*
     std::cout << "sRem\t\tRemove Specific characters of string\n";
-    std::cout << "sFont\t\tConvert string to weird Font\n*/
+    std::cout << "sFont\t\tConvert string to weird font\n*/
 
     std::cout << "\nMore settings on: https://github.com/jalupaja/MultiTool\n";
 }

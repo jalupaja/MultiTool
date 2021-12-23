@@ -9,19 +9,28 @@ A multi-Platform multi-Functional Tool writte in C++
  [Pw](#pw)   | Show a random password | 
  [Num](#num) | Show a pseudorandom number | 
  [Name](#name) | Show a random username | 
- [d2h](#d2h---base64dec) | Convert decimal to hex |  
- [d2b](#d2h---base64dec) | Convert decimal to binary | 
- [d2c](#d2h---base64dec) | Convert decimal to character | 
- [h2d](#d2h---base64dec) | Convert hex to decimal | 
- [h2b](#d2h---base64dec) | Convert hex to binary | 
- [h2s](#d2h---base64dec) | Convert hex to string | 
- [b2d](#d2h---base64dec) | Convert binary to decimal | 
- [b2h](#d2h---base64dec) | Convert binary to hex | 
- [b2c](#d2h---base64dec) | Convert binary to character | 
- [s2h](#d2h---base64dec) | Convert string to hex | 
- [s2b](#d2h---base64dec) | Convert string to binary | 
- [base64Enc](#d2h---base64dec) | Encode a base64 string | 
- [base64Dec](#d2h---base64dec) | Decode a base64 string | 
+ [d2h](#d2h---srev) | Convert decimal to hex |  
+ [d2b](#d2h---srev) | Convert decimal to binary | 
+ [d2c](#d2h---srev) | Convert decimal to character | 
+ [h2d](#d2h---srev) | Convert hex to decimal | 
+ [h2b](#d2h---srev) | Convert hex to binary | 
+ [h2s](#d2h---srev) | Convert hex to string | 
+ [b2d](#d2h---srev) | Convert binary to decimal | 
+ [b2h](#d2h---srev) | Convert binary to hex | 
+ [b2c](#d2h---srev) | Convert binary to character | 
+ [s2h](#d2h---srev) | Convert string to hex | 
+ [s2b](#d2h---srev) | Convert string to binary | 
+ [base64Enc](#d2h---srev) | Encode a base64 string | 
+ [base64Dec](#d2h---srev) | Decode a base64 string | 
+ [sLen](#d2h---srev) | Get string length |
+ [sUpper](#d2h---srev) | Convert string to only uppercase |
+ [sLower](#d2h---srev) | Convert string to only lowercase |
+ [sRev](#d2h---srev) | Reverse string |
+ [sTiems](#stimes) | Output string multiple times |
+ [sSplitNum](#ssplitnum) | Split string after maximum length |
+ [sSplitChar](#ssplitchar) | Split string at specific character(s) |
+ [(sRem)](#srem) | Remove Specific characters of string |
+ [(sFont)](#sfont) | Convert string to weird font |
 
 # Options
 
@@ -72,7 +81,7 @@ Usage:
  4 uppercase names with a minimum length of 20 and maximum length of 50 | ```mt Name ur4m20x50``` |
  2 names using 'firstList.txt' and 'secondList.txt' saved at 'C:\\' | ```mt Name r2 "C:\"``` |
 
-## d2h - base64Dec
+## d2h - sRev
 Usage: 
     ```mt d2h [input]```
 
@@ -81,3 +90,21 @@ Examples:
 | -- | -- |
  Convert 5 to hex | ```mt d2h 5``` |
  Decode base64 string | ```mt base64Dec aHR0cHM6Ly9naXRodWIuY29tL2phbHVwYWph``` |
+
+## sTimes
+Usage:
+    ```mt sTimes [input] [times]```
+
+Examples:
+| Example | howto |
+| -- | -- |
+ Output aaaaa | ```mt sTimes a 5``` |
+ Output abcabc | ```mt sTimes abc 2``` |
+
+## sSplitNum
+
+## sSplitChar
+
+## sRem
+
+## sFont
