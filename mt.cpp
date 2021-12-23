@@ -33,6 +33,7 @@ int strLen(std::string);
 std::string strUpper(std::string);
 std::string strLower(std::string);
 std::string strRev(std::string);
+void strTimes(std::string, int);
 void strSplitNum(std::string, int);
 void strSplitChar(std::string, std::string);
 std::string strRem(std::string, std::string);
@@ -303,6 +304,30 @@ int main (int argc, const char *argv[])
             std::cout << "\n";
         }
     }
+    else if (!strcmp(argv[1], "sTimes") || !strcmp(argv[1], "stimes") || !strcmp(argv[1], "st"))
+    {
+        if (argc > 3)
+        {
+            bool useThird = false;
+            for (int i = 0; i < std::string(argv[3]).length(); i++)
+            {
+                if (!isdigit(argv[3][i])) useThird = true;
+                break;
+            }
+            if (useThird)
+            {
+                strTimes(argv[3], string2Num(argv[2]));
+            }
+            else
+            {
+                strTimes(argv[2], string2Num(argv[3]));
+            }
+        }
+        else if (argc > 2)
+        {
+            strTimes(argv[2], 2);
+        }
+    }
     else if (!strcmp(argv[1], "sSplitNum") || !strcmp(argv[1], "ssplitnum") || !strcmp(argv[1], "ssn"))
     {
         if (argc > 3) 
@@ -352,7 +377,8 @@ int main (int argc, const char *argv[])
         {
             for (int i = 2; i < argc; i++)
             {
-                std::cout << sFont(argv[i]) << " ";
+                sFont(argv[i]);
+                std::cout << " ";
             }
             std::cout << "\n";
         }
@@ -770,6 +796,13 @@ std::string strRev(std::string str)
     str = tmp;
     return str;
 }
+void strTimes(std::string str, int times)
+{
+    std::cout << times << ":" << str << "!\n";
+    for (int i = 0; i < times; i++)
+        std::cout << str;
+    std::cout << "\n";
+}
 void strSplitNum(std::string str, int maxLen)
 {//!!! core dumped (out of bounds)
     do
@@ -918,7 +951,8 @@ void helpOutput()
     std::cout << "sLen\t\tGet string length\n";
     std::cout << "sUpper\t\tConvert string to only uppercase\n";
     std::cout << "sLower\t\tConvert string to only lowercase\n";
-    std::cout << "sRev\t\tReverse string\n";/*
+    std::cout << "sRev\t\tReverse string\n";
+    std::cout << "sTimes\t\tOutput string multiple times\n";/*
     std::cout << "sSplitNum\tSplit string after maximum length\n";
     std::cout << "sSplitChar\tSplit string after specific characters\n";
     std::cout << "sRem\t\tRemove Specific characters of string\n";
