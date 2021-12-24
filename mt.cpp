@@ -343,7 +343,6 @@ int main (int argc, const char *argv[])
         {
             strSplitNum(argv[2], (std::string(argv[2]).length() / 4));
         }
-        std::cout << std::string(argv[3]).length() << ":" << std::string(argv[2]).length();
     }
     else if (!strcmp(argv[1], "sSplitChar") || !strcmp(argv[1], "ssplitchar") || !strcmp(argv[1], "ssc"))
     {
