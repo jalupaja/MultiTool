@@ -8,6 +8,7 @@
 #include <thread>
 #include <vector>
 #include <fstream>
+#include <sstream>
 #include <unistd.h>
 
 const std::string DEFAULTPATH = "Resources/";
@@ -45,6 +46,7 @@ void strSplitBeforeChar(std::string, std::string);
 void strSplitAfterChar(std::string, std::string);
 std::string strRem(std::string, std::string);
 void strFont(std::string, int);
+void addLineNumbers(std::string);
 
 long string2Num(std::string);
 long system2Num(std::string, int);
@@ -442,6 +444,15 @@ int main (int argc, char *argv[])
         } else if (argc > 2) {
             strFont(lastArg, 0);
         }
+    }
+    else if (!strcmp(argv[1], "addLineNums") || !strcmp(argv[1], "addLineNum") || !strcmp(argv[1], "addlinenums") || !strcmp(argv[1], "addlinenum") || !strcmp(argv[1], "addln") || !strcmp(argv[1], "aln")) 
+    {
+        std::string in = "";
+        for (int i = 2; i < argc - 1; i++)
+        {
+            in = in + argv[i] + "\n";
+        }
+        addLineNumbers(in + lastArg);
     }
     else
     {
@@ -1053,6 +1064,16 @@ void strFont(std::string str, int level)
     }
     std::cout << "\n";
 }
+void addLineNumbers(std::string str)
+{
+    std::istringstream in(str);
+    std::string line;
+    int counter = 1;
+    while (std::getline(in, line)) {
+        std::cout << counter << ". " << line << "\n";
+        counter++;
+    }
+}
 
 long string2Num(std::string input)
 {
@@ -1143,6 +1164,7 @@ void helpOutput()
     std::cout << "sSplitChar\tSplit string at specific character(s)\n";
     std::cout << "sRem\t\tRemove Specific characters of string\n";
     std::cout << "sFont\t\tConvert string to weird font\n";
+    std::cout << "addLineNums\tAdd line Numbers to the input\n";
 
     std::cout << "\nMore settings on: https://github.com/jalupaja/MultiTool\n";
 }

@@ -31,6 +31,7 @@ A multi-Platform multi-Functional tool written in C++
  [sSplitChar](#ssplitchar) | Split string at specific character(s) |
  [sRem](#srem) | Remove Specific characters of string |
  [sFont](#sfont) | Convert string to weird font |
+ [addLineNums](#addlinenums) | Add line Numbers to the input |
 
 This tool allows input via pipe symbol("|"). The input will function as read as the last argument!
 
@@ -142,3 +143,14 @@ Examples:
  Create weird font at lowest level | ```mt sFont ababcb -1``` |
  Create weird font at mid level | ```mt sFont ababcb -2``` |
  Create weird font at highest level | ```mt sFont ababcb -3``` |
+
+## addLineNums
+Usage:
+	```mt addLineNums [input]```
+	
+Examples:
+| Example | howto |
+| -- | -- |
+ Add line numbers -> 1. a \n2. b | ```mt addLineNums a b``` |
+ Add line numbers to file.txt | ```cat file.txt | mt aln > file.txt``` |
+ 
