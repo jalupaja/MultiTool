@@ -8,6 +8,7 @@
 #include <thread>
 #include <vector>
 #include <fstream>
+#include <unistd.h>
 
 const std::string DEFAULTPATH = "Resources/";
 
@@ -29,6 +30,9 @@ void b2s(std::string);
 void s2h(std::string);
 void s2b(std::string);
 
+std::string base64Enc(std::string);
+std::string base64Dec(std::string);
+
 int strLen(std::string);
 std::string strUpper(std::string);
 std::string strLower(std::string);
@@ -41,9 +45,6 @@ void strSplitAfterChar(std::string, std::string);
 std::string strRem(std::string, std::string);
 void strFont(std::string, int);
 
-std::string base64Enc(std::string);
-std::string base64Dec(std::string);
-
 long string2Num(std::string);
 long system2Num(std::string, int);
 
@@ -52,8 +53,21 @@ long randomNum(long, long);
 
 void helpOutput();
 
-int main (int argc, const char *argv[])
+int main (int argc, char *argv[])
 {
+    std::string lastArg;
+    
+    //check if pipe is used
+    if (!isatty(fileno(stdin))) {
+        for (std::string line; std::getline(std::cin, line);) {
+            lastArg += line + "\n";
+        }
+        argc++;
+    }
+    else {
+        lastArg = argv[argc - 1];
+    }
+
     if (argc == 1)
     {
         helpOutput();
@@ -64,11 +78,11 @@ int main (int argc, const char *argv[])
         newSeed();
         if (argc > 3)
         {
-            outputPw(argv[2], argv[3]);
+            outputPw(argv[2], lastArg);
         }
         else if (argc > 2)
         {
-            outputPw(argv[2], "");
+            outputPw(lastArg, "");
         }
         else
         {
@@ -80,11 +94,11 @@ int main (int argc, const char *argv[])
         newSeed();
         if (argc > 3) 
         {
-            std::cout << randomNum(string2Num(argv[2]), string2Num(argv[3])) << "\n";
+            std::cout << randomNum(string2Num(argv[2]), string2Num(lastArg)) << "\n";
         }
         else if (argc > 2) 
         {
-            std::cout << randomNum(1, string2Num(argv[2])) << "\n";
+            std::cout << randomNum(1, string2Num(lastArg)) << "\n";
         }
         else 
         {
@@ -96,11 +110,11 @@ int main (int argc, const char *argv[])
         newSeed();
         if (argc > 3)
         {
-            outputName(argv[2], argv[3]);
+            outputName(argv[2], lastArg);
         }
         else if (argc > 2)
         {
-            outputName(argv[2], "");
+            outputName(lastArg, "");
         }
         else
         {
@@ -111,11 +125,12 @@ int main (int argc, const char *argv[])
     {
         if (argc > 2) 
         {
-            for (int i = 2; i < argc; i++)
+            for (int i = 2; i < argc - 1; i++)
             {
                 d2h(argv[i]);
                 std::cout << " ";
             }
+            d2h(lastArg);
             std::cout << "\n";
         }
     }
@@ -123,11 +138,12 @@ int main (int argc, const char *argv[])
     {
         if (argc > 2) 
         {
-            for (int i = 2; i < argc; i++)
+            for (int i = 2; i < argc - 1; i++)
             {
                 d2b(argv[i]);
                 std::cout << " ";
             }
+            d2b(lastArg);
             std::cout << "\n";
         }
     }
@@ -135,11 +151,12 @@ int main (int argc, const char *argv[])
     {
         if (argc > 2) 
         {
-            for (int i = 2; i < argc; i++)
+            for (int i = 2; i < argc - 1; i++)
             {
                 d2s(argv[i]);
                 std::cout << " ";
             }
+            d2s(lastArg);
             std::cout << "\n";
         }
     }
@@ -147,11 +164,12 @@ int main (int argc, const char *argv[])
     {
         if (argc > 2) 
         {
-            for (int i = 2; i < argc; i++)
+            for (int i = 2; i < argc - 1; i++)
             {
                 h2d(argv[i]);
                 std::cout << " ";
             }
+            h2d(lastArg);
             std::cout << "\n";
         }
     }
@@ -159,11 +177,12 @@ int main (int argc, const char *argv[])
     {
         if (argc > 2) 
         {
-            for (int i = 2; i < argc; i++)
+            for (int i = 2; i < argc - 1; i++)
             {
                 h2b(argv[i]);
                 std::cout << " ";
             }
+            h2b(lastArg);
             std::cout << "\n";
         }
     }
@@ -171,11 +190,12 @@ int main (int argc, const char *argv[])
     {
         if (argc > 2) 
         {
-            for (int i = 2; i < argc; i++)
+            for (int i = 2; i < argc - 1; i++)
             {
                 h2s(argv[i]);
                 std::cout << " ";
             }
+            h2s(lastArg);
             std::cout << "\n";
         }
     }
@@ -183,11 +203,12 @@ int main (int argc, const char *argv[])
     {
         if (argc > 2) 
         {
-            for (int i = 2; i < argc; i++)
+            for (int i = 2; i < argc - 1; i++)
             {
                 b2d(argv[i]);
                 std::cout << " ";
             }
+            b2d(lastArg);
             std::cout << "\n";
         }
     }
@@ -195,11 +216,12 @@ int main (int argc, const char *argv[])
     {
         if (argc > 2) 
         {
-            for (int i = 2; i < argc; i++)
+            for (int i = 2; i < argc - 1; i++)
             {
                 b2h(argv[i]);
                 std::cout << " ";
             }
+            b2h(lastArg);
             std::cout << "\n";
         }
     }
@@ -207,10 +229,11 @@ int main (int argc, const char *argv[])
     {
         if (argc > 2) 
         {
-            for (int i = 2; i < argc; i++)
+            for (int i = 2; i < argc - 1; i++)
             {
                 b2s(argv[i]);
             }
+            b2s(lastArg);
             std::cout << "\n";
         }
     }
@@ -218,11 +241,12 @@ int main (int argc, const char *argv[])
     {
         if (argc > 2) 
         {
-            for (int i = 2; i < argc; i++)
+            for (int i = 2; i < argc - 1; i++)
             {
                 s2h(argv[i]);
                 std::cout << " ";
             }
+            s2h(lastArg);
             std::cout << "\n";
         }
     }
@@ -230,11 +254,12 @@ int main (int argc, const char *argv[])
     {
         if (argc > 2) 
         {
-            for (int i = 2; i < argc; i++)
+            for (int i = 2; i < argc - 1; i++)
             {
                 s2b(argv[i]);
                 std::cout << " ";
             }
+            s2b(lastArg);
             std::cout << "\n";
         }
     }
@@ -242,33 +267,33 @@ int main (int argc, const char *argv[])
     {
         if (argc > 2) 
         {
-            for (int i = 2; i < argc; i++)
+            for (int i = 2; i < argc - 1; i++)
             {
                 std::cout << base64Enc(argv[i]) << " ";
             }
-            std::cout << "\n";
+            std::cout << base64Enc(lastArg) << "\n";
         }
     }
     else if (!strcmp(argv[1], "base64Dec") || !strcmp(argv[1], "base64dec") || !strcmp(argv[1], "b64d"))
     {
         if (argc > 2) 
         {
-            for (int i = 2; i < argc; i++)
+            for (int i = 2; i < argc - 1; i++)
             {
                 std::cout << base64Dec(argv[i]) << " ";
             }
-            std::cout << "\n";
+            std::cout << base64Dec(lastArg) << "\n";
         }
     }
     else if (!strcmp(argv[1], "sLen") || !strcmp(argv[1], "slen"))
     {
         if (argc > 2) 
         {
-            for (int i = 2; i < argc; i++)
+            for (int i = 2; i < argc - 1; i++)
             {
                 std::cout << strLen(argv[i]) << " ";
             }
-            std::cout << "\n";
+            std::cout << strLen(lastArg) << "\n";
         }
         else
             std::cout << "0\n";
@@ -277,33 +302,33 @@ int main (int argc, const char *argv[])
     {
         if (argc > 2) 
         {
-            for (int i = 2; i < argc; i++)
+            for (int i = 2; i < argc - 1; i++)
             {
                 std::cout << strUpper(argv[i]) << " ";
             }
-            std::cout << "\n";
+            std::cout << strUpper(lastArg) << "\n";
         }
     }
     else if (!strcmp(argv[1], "sLower") || !strcmp(argv[1], "slower") || !strcmp(argv[1], "sl"))
     {
         if (argc > 2) 
         {
-            for (int i = 2; i < argc; i++)
+            for (int i = 2; i < argc - 1; i++)
             {
                 std::cout << strLower(argv[i]) << " ";
             }
-            std::cout << "\n";
+            std::cout << strLower(lastArg) << "\n";
         }
     }
     else if (!strcmp(argv[1], "sRev") || !strcmp(argv[1], "srev"))
     {
         if (argc > 2) 
         {
-            for (int i = 2; i < argc; i++)
+            for (int i = 2; i < argc - 1; i++)
             {
                 std::cout << strRev(argv[i]) << " ";
             }
-            std::cout << "\n";
+            std::cout << strRev(lastArg) << "\n";
         }
     }
     else if (!strcmp(argv[1], "sTimes") || !strcmp(argv[1], "stimes") || !strcmp(argv[1], "st"))
@@ -311,37 +336,37 @@ int main (int argc, const char *argv[])
         if (argc > 3)
         {
             bool useThird = false;
-            for (int i = 0; i < std::string(argv[3]).length(); i++)
+            for (int i = 0; i < std::string(lastArg).length(); i++)
             {
-                if (!isdigit(argv[3][i])) useThird = true;
+                if (!isdigit(lastArg[i])) useThird = true;
                 break;
             }
             if (useThird)
             {
-                strTimes(argv[3], string2Num(argv[2]));
+                strTimes(lastArg, string2Num(argv[2]));
             }
             else
             {
-                strTimes(argv[2], string2Num(argv[3]));
+                strTimes(argv[2], string2Num(lastArg));
             }
         }
         else if (argc > 2)
         {
-            strTimes(argv[2], 2);
+            strTimes(lastArg, 2);
         }
     }
     else if (!strcmp(argv[1], "sSplitNum") || !strcmp(argv[1], "ssplitnum") || !strcmp(argv[1], "ssn"))
     {
         if (argc > 3) 
         {
-            if (std::string(argv[3]).length() > std::string(argv[2]).length())
-                strSplitNum(argv[3], string2Num(argv[2]));
+            if (std::string(lastArg).length() > std::string(argv[2]).length())
+                strSplitNum(lastArg, string2Num(argv[2]));
             else
-                strSplitNum(argv[2], string2Num(argv[3]));
+                strSplitNum(argv[2], string2Num(lastArg));
         }
         else if (argc > 2)
         {
-            strSplitNum(argv[2], (std::string(argv[2]).length() / 4));
+            strSplitNum(lastArg, (std::string(lastArg).length() / 4));
         }
     }
     else if (!strcmp(argv[1], "sSplitChar") || !strcmp(argv[1], "ssplitchar") || !strcmp(argv[1], "ssc"))
@@ -350,30 +375,30 @@ int main (int argc, const char *argv[])
         {
             if (argv[2][0] == '-') {
                 if (argv[2][1] == '=')
-                    strSplitBeforeChar(argv[3], std::string(argv[2]).substr(2));
+                    strSplitBeforeChar(lastArg, std::string(argv[2]).substr(2));
                 else if (argv[2][std::string(argv[2]).length() - 1] == '=')
-                    strSplitAfterChar(argv[3], std::string(argv[2]).substr(1, std::string(argv[2]).length() - 2));
+                    strSplitAfterChar(lastArg, std::string(argv[2]).substr(1, std::string(argv[2]).length() - 2));
                 else
-                    strSplitChar(argv[3], std::string(argv[2]).substr(1));
-            } else if (argv[3][0] == '-') {
-                if (argv[3][1] == '=')
-                    strSplitBeforeChar(argv[2], std::string(argv[3]).substr(2));
-                else if (argv[3][std::string(argv[3]).length() - 1] == '=')
-                    strSplitAfterChar(argv[2], std::string(argv[3]).substr(1, std::string(argv[3]).length() - 2));
+                    strSplitChar(lastArg, std::string(argv[2]).substr(1));
+            } else if (lastArg[0] == '-') {
+                if (lastArg[1] == '=')
+                    strSplitBeforeChar(argv[2], std::string(lastArg).substr(2));
+                else if (lastArg[std::string(lastArg).length() - 1] == '=')
+                    strSplitAfterChar(argv[2], std::string(lastArg).substr(1, std::string(lastArg).length() - 2));
                 else
-                    strSplitChar(argv[2], std::string(argv[3]).substr(1));
+                    strSplitChar(argv[2], std::string(lastArg).substr(1));
             } else {
-                if (argv[3][0] == '=')
-                    strSplitBeforeChar(argv[2], std::string(argv[3]).substr(1));
-                else if (argv[3][std::string(argv[3]).length() - 1] == '=')
-                    strSplitAfterChar(argv[2], std::string(argv[3]).substr(0, std::string(argv[3]).length() - 1));
+                if (lastArg[0] == '=')
+                    strSplitBeforeChar(argv[2], std::string(lastArg).substr(1));
+                else if (lastArg[std::string(lastArg).length() - 1] == '=')
+                    strSplitAfterChar(argv[2], std::string(lastArg).substr(0, std::string(lastArg).length() - 1));
                 else
-                    strSplitChar(argv[2], argv[3]);
+                    strSplitChar(argv[2], lastArg);
             }
         }
         else if (argc > 2)
         {
-            strSplitChar(argv[2], " ");
+            strSplitChar(lastArg, " ");
         }
     }
     else if (!strcmp(argv[1], "sRem") || !strcmp(argv[1], "srem") || !strcmp(argv[1], "sr"))
@@ -381,11 +406,11 @@ int main (int argc, const char *argv[])
         if (argc > 3) 
         {
             if (argv[2][0] == '-')
-                std::cout << strRem(argv[3], std::string(argv[2]).substr(1));
-            else if (argv[3][0] == '-')
-                std::cout << strRem(argv[2], std::string(argv[3]).substr(1));
+                std::cout << strRem(lastArg, std::string(argv[2]).substr(1));
+            else if (lastArg[0] == '-')
+                std::cout << strRem(argv[2], std::string(lastArg).substr(1));
             else
-                std::cout << strRem(argv[2], argv[3]);
+                std::cout << strRem(argv[2], lastArg);
             std::cout << "\n";
         }
     }
@@ -394,14 +419,14 @@ int main (int argc, const char *argv[])
         newSeed();
         if (argc > 3) {
             if (argv[2][0] == '-')
-                strFont(argv[3], string2Num(std::string(argv[2]).substr(1)));
-            else if (argv[3][0] == '-')
-                strFont(argv[2], string2Num(std::string(argv[3]).substr(1)));
+                strFont(lastArg, string2Num(std::string(argv[2]).substr(1)));
+            else if (lastArg[0] == '-')
+                strFont(argv[2], string2Num(std::string(lastArg).substr(1)));
             else
-                strFont(argv[2], string2Num(argv[3]));
+                strFont(argv[2], string2Num(lastArg));
 
         } else if (argc > 2) {
-            strFont(argv[2], 0);
+            strFont(lastArg, 0);
         }
     }
     else
