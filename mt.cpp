@@ -27,6 +27,7 @@ void h2s(std::string);
 void b2d(std::string);
 void b2h(std::string);
 void b2s(std::string);
+void s2d(std::string);
 void s2h(std::string);
 void s2b(std::string);
 
@@ -237,7 +238,20 @@ int main (int argc, char *argv[])
             std::cout << "\n";
         }
     }
-    else if (!strcmp(argv[1], "s2h") || !strcmp(argv[1], "sh"))
+    else if (!strcmp(argv[1], "s2d") || !strcmp(argv[1], "sd") || !strcmp(argv[1], "c2d") || !strcmp(argv[1], "cd"))
+    {
+        if (argc > 2) 
+        {
+            for (int i = 2; i < argc - 1; i++)
+            {
+                s2d(argv[i]);
+                std::cout << "\n";
+            }
+            s2d(lastArg);
+            std::cout << "\n";
+        }
+    }
+    else if (!strcmp(argv[1], "s2h") || !strcmp(argv[1], "sh") || !strcmp(argv[1], "c2h") || !strcmp(argv[1], "ch"))
     {
         if (argc > 2) 
         {
@@ -250,7 +264,7 @@ int main (int argc, char *argv[])
             std::cout << "\n";
         }
     }
-    else if (!strcmp(argv[1], "s2b") || !strcmp(argv[1], "sb"))
+    else if (!strcmp(argv[1], "s2b") || !strcmp(argv[1], "sb") || !strcmp(argv[1], "c2b") || !strcmp(argv[1], "cb"))
     {
         if (argc > 2) 
         {
@@ -647,8 +661,8 @@ void d2b(std::string decimal)
 }
 void d2s(std::string decimal)
 {
-    std::string out = "x";
-    out[0] = string2Num(decimal);
+    char out = 'x';
+    out = string2Num(decimal);
     std::cout << out;
 }
 void h2d(std::string hex)
@@ -707,6 +721,14 @@ void b2s(std::string bin)
     std::string out = "x";
     out[0] = system2Num(bin, 2);
     std::cout << out;
+}
+void s2d(std::string str)
+{
+    int out = 0;
+    for (int i = 0; i < str.length(); i++) {
+        out = str[i];
+        std::cout << out << " ";
+    }
 }
 void s2h(std::string str)
 {
@@ -1107,6 +1129,7 @@ void helpOutput()
     std::cout << "b2d\t\tConvert binary to decimal\n";
     std::cout << "b2h\t\tConvert binary to hex\n";
     std::cout << "b2c\t\tConvert binary to character\n";
+    std::cout << "s2d\t\tConvert characters to decimal\n";
     std::cout << "s2h\t\tConvert string to hex\n";
     std::cout << "s2b\t\tConvert string to binary\n";
     std::cout << "base64Enc\tEncode a base64 string\n";
