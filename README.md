@@ -1,5 +1,5 @@
 # MultiTool
-A multi-Platform multi-Functional Tool writte in C++
+A multi-Platform multi-Functional tool written in C++
 
 # Features:
 
@@ -31,6 +31,8 @@ A multi-Platform multi-Functional Tool writte in C++
  [sSplitChar](#ssplitchar) | Split string at specific character(s) |
  [sRem](#srem) | Remove Specific characters of string |
  [sFont](#sfont) | Convert string to weird font |
+
+This tool allows input via pipe symbol("|"). The input will function as read as the last argument!
 
 # Options
 
