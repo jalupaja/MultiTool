@@ -1,4 +1,5 @@
 #include "names.h"
+#include "config.h"
 #include "colorOutput.h"
 #include "converters.h"
 #include "random.h"

@@ -62,17 +62,15 @@ void stringReverse(char *string, char **output)
 {
     size_t strLen = strlen(string);
     *output = malloc(strLen);
-    for (int i = 0; i < strLen; i++) {
+    for (size_t i = 0; i < strLen; i++)
         (*output)[i] = string[strLen - i - 1];
-    }
     (*output)[strLen] = '\0';
 }
 
 void outputStringTimes(char *string, size_t times)
 {
-    for (int i = 0; i < times; i++) {
+    for (size_t i = 0; i < times; i++)
         printf("%s", string);
-    }
     printf("\n");
 }
 
@@ -80,9 +78,8 @@ void stringTimes(char *string, size_t times, char **output)
 {
     size_t strLen = strlen(string);
     *output = malloc(strLen * times + 1);
-    for (int i = 0; i < times; i++) {
+    for (size_t i = 0; i < times; i++)
         strncpy(&((*output)[i * strLen]), string, strLen);
-    }
 }
 
 void outputStringSplitNum(char *string, size_t num)

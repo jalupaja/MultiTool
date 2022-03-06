@@ -35,7 +35,7 @@ void randomPw(char **output, bool useLower, bool useUpper, bool useNum, bool use
             alphabet[alphabetLen++] = i;
     if (useSpec) {
         char specChars[33] = "!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~";
-        for (int i = 0; i < strlen(specChars); i++)
+        for (size_t i = 0; i < strlen(specChars); i++)
             alphabet[alphabetLen++] = specChars[i];
     }
     if (alphabetLen < 1) {
@@ -52,19 +52,19 @@ void randomPw(char **output, bool useLower, bool useUpper, bool useNum, bool use
     (*output)[maxLength] = '\0';
 }
 
-void outputPw(char *options, char *maxLengthInput)
+void outputPw(char *options, char *lengthInput)
 {
     bool useLower = false, useUpper = false, useNum = false, useSpec = false;
-    int repeatCounter = 1, maxLength = 20;
+    int_fast64_t repeatCounter = 1, len = 20;
 
-    if (isdigit(maxLengthInput[0]))
-        maxLength = string2decimal(maxLengthInput);
+    if (isdigit(lengthInput[0]))
+        len = string2decimal(lengthInput);
     else if (isdigit(options[0])) {
-        maxLength = string2decimal(options);
-        options = maxLengthInput;
+        len = string2decimal(options);
+        options = lengthInput;
     }
 
-    for (int i = 0; i < strlen(options); i++) {
+    for (size_t i = 0; i < strlen(options); i++) {
         switch (options[i]) {
         case 'l':
         case 'L':
@@ -97,8 +97,8 @@ void outputPw(char *options, char *maxLengthInput)
     }
 
     char *output = NULL;
-    for (size_t i = 0; i < repeatCounter; i++) {
-        randomPw(&output, useLower, useUpper, useNum, useSpec, maxLength);
+    for (int i = 0; i < repeatCounter; i++) {
+        randomPw(&output, useLower, useUpper, useNum, useSpec, len);
         printf("%s\n", output);
         free(output);
     }
