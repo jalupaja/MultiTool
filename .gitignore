@@ -1,6 +1,9 @@
 .vscode/
 lib/
 *.linux
+bin
+build
+mt
 
 # Prerequisites
 *.d
