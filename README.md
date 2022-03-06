@@ -1,27 +1,28 @@
 # MultiTool
-A multi-Platform multi-Functional tool written in C++
 
-# Features:
+A multi-Platform multi-Functional tool written in C
+
+# Features
 
 | Feature | Usage |
 | ------- | ----- |
- help | Show help output | 
- [Pw](#pw)   | Show a random password | 
- [Num](#num) | Show a pseudorandom number | 
- [Name](#name) | Show a random username | 
- [d2h](#d2h---srev) | Convert decimal to hex |  
- [d2b](#d2h---srev) | Convert decimal to binary | 
- [d2c](#d2h---srev) | Convert decimal to character | 
- [h2d](#d2h---srev) | Convert hex to decimal | 
- [h2b](#d2h---srev) | Convert hex to binary | 
- [h2s](#d2h---srev) | Convert hex to string | 
- [b2d](#d2h---srev) | Convert binary to decimal | 
- [b2h](#d2h---srev) | Convert binary to hex | 
- [b2c](#d2h---srev) | Convert binary to character | 
- [s2h](#d2h---srev) | Convert string to hex | 
- [s2b](#d2h---srev) | Convert string to binary | 
- [base64Enc](#d2h---srev) | Encode a base64 string | 
- [base64Dec](#d2h---srev) | Decode a base64 string | 
+ help | Show help output |
+ [Pw](#pw)   | Show a random password |
+ [Num](#num) | Show a pseudorandom number |
+ [Name](#name) | Show a random username |
+ [d2h](#d2h---srev) | Convert decimal to hex |
+ [d2b](#d2h---srev) | Convert decimal to binary |
+ [d2c](#d2h---srev) | Convert decimal to character |
+ [h2d](#d2h---srev) | Convert hex to decimal |
+ [h2b](#d2h---srev) | Convert hex to binary |
+ [h2s](#d2h---srev) | Convert hex to string |
+ [b2d](#d2h---srev) | Convert binary to decimal |
+ [b2h](#d2h---srev) | Convert binary to hex |
+ [b2c](#d2h---srev) | Convert binary to character |
+ [s2h](#d2h---srev) | Convert string to hex |
+ [s2b](#d2h---srev) | Convert string to binary |
+ [base64Enc](#d2h---srev) | Encode a base64 string |
+ [base64Dec](#d2h---srev) | Decode a base64 string |
  [sLen](#d2h---srev) | Get string length |
  [sUpper](#d2h---srev) | Convert string to only uppercase |
  [sLower](#d2h---srev) | Convert string to only lowercase |
@@ -30,42 +31,44 @@ A multi-Platform multi-Functional tool written in C++
  [sSplitNum](#ssplitnum) | Split string after maximum length |
  [sSplitChar](#ssplitchar) | Split string at specific character(s) |
  [sRem](#srem) | Remove Specific characters of string |
- [sFont](#sfont) | Convert string to weird font |
- [addLineNums](#addlinenums) | Add line Numbers to the input |
+ [lineAt](#lineat) | Output only the line at the given number |
 
-This tool allows input via pipe symbol("|"). The input will function as read as the last argument!
+This tool doe's not yet allow input via pipe symbol("|"). The input will function as read as the last argument!
 
 # Options
 
 ## Pw
+
 | Option | Usage |
 | -- | -- |
- 'l' | use lower characters | 
- 'u' | use upper characters | 
- 'n' | use numbers | 
- 's' | use special characters | 
- 'rx' | create x Passwords | 
+ 'l' | use lower characters |
+ 'u' | use upper characters |
+ 'n' | use numbers |
+ 's' | use special characters |
+ 'rx' | create x Passwords |
 
-Usage: 
-    ```mt Pw [options] [length]```
+Usage:
+    `mt Pw [options] [length]`
 
 | Example | howto |
 | -- | -- |
- 1 password with the length of 20 | ```mt Pw``` | 
- 12 passwords with the length of 50 | ```mt Pw r12 50``` | 
- 2 number-only passwords with the length of 4 | ```mt Pw nr2 4``` | 
+ 1 password with the length of 20 | `mt Pw` |
+ 12 passwords with the length of 50 | `mt Pw r12 50` |
+ 2 number-only passwords with the length of 4 | `mt Pw nr2 4` |
 
 ## Num
+
 Usage:
-    ```mt Num [min] [max]```
+    `mt Num [min] [max]`
 
 | Example | howto |
 | -- | -- |
- Number between 1 and 10 | ```mt Num``` | 
- Number between 1 and 100 | ```mt Num 100``` | 
- Number between -10 and 0 | ```mt Num -10 0``` | 
+ Number between 1 and 10 | `mt Num` |
+ Number between 1 and 100 | `mt Num 100` |
+ Number between -10 and 0 | `mt Num -10 0` |
 
 ## Name
+
 | Option | Usage |
 | -- | -- |
  'l' | only lowercase name |
@@ -76,81 +79,75 @@ Usage:
  'xy' | set maximum length to y |
 
 Usage:
-    ```mt Name [options] [path]```
+    `mt Name [options] [path]`
 
 | Example | howto |
 | -- | -- |
- Name with a minimum length of 3 and maximum length of 20 |```mt Name```
- 4 uppercase names with a minimum length of 20 and maximum length of 50 | ```mt Name ur4m20x50``` |
- 2 names using 'firstList.txt' and 'secondList.txt' saved at 'C:\\' | ```mt Name r2 "C:\"``` |
+ Name with a minimum length of 3 and maximum length of 20 |`mt Name`
+ 4 uppercase names with a minimum length of 20 and maximum length of 50 | `mt Name ur4m20x50` |
+ 2 names using 'firstList.txt' and 'secondList.txt' saved at 'C:\\' | `mt Name r2 "C:\"` |
 
 ## d2h - sRev
-Usage: 
-    ```mt d2h [input]```
+
+Usage:
+    `mt d2h [input]`
 
 Examples:
 | Example | howto |
 | -- | -- |
- Convert 5 to hex | ```mt d2h 5``` |
- Decode base64 string | ```mt base64Dec aHR0cHM6Ly9naXRodWIuY29tL2phbHVwYWph``` |
+ Convert 5 to hex | `mt d2h 5` |
+ Decode base64 string | `mt base64Dec aHR0cHM6Ly9naXRodWIuY29tL2phbHVwYWph` |
 
 ## sTimes
+
 Usage:
-    ```mt sTimes [input] [times]```
+    `mt sTimes [input] [times]`
 
 Examples:
 | Example | howto |
 | -- | -- |
- Output aaaaa | ```mt sTimes a 5``` |
- Output abcabc | ```mt sTimes abc 2``` |
+ Output aaaaa | `mt sTimes a 5` |
+ Output abcabc | `mt sTimes abc 2` |
 
 ## sSplitNum
+
 Usage:
-    ```mt sSplitNum [input] [after]```
+    `mt sSplitNum [input] [after]`
 
 Examples:
 | Example | howto |
 | -- | -- |
- Split "abcdefg" after every 2 characters | ```mt sSplitNum abcdefg 2``` |
+ Split "abcdefg" after every 2 characters | `mt sSplitNum abcdefg 2` |
 
 ## sSplitChar
+
 Usage:
-    ```mt sSplitChar [input] -[characters]```
+    `mt sSplitChar [input] -[characters]`
 
 Examples:
 | Example | howto |
 | -- | -- |
- Split "ababcb" at 'a' and 'c' -> "b b b" | ```mt sSplitChar ababcb -ac``` |
- Split "abab" before 'a' -> " ab ab" | ```mt sSplitChar ababcb -=a``` |
- Split "abab" after 'a' -> "a ba b" | ```mt sSplitChar ababcb -a=``` |
+ Split "ababcb" at 'a' and 'c' -> "b b b" | `mt sSplitChar ababcb -ac` |
+ Split "abab" before 'a' -> " ab ab" | `mt sSplitChar ababcb -=a` |
+ Split "abab" after 'a' -> "a ba b" | `mt sSplitChar ababcb -a=` |
 
 ## sRem
+
 Usage:
-    ```mt sRem [input] -[characters]```
+    `mt sRem [input] -[characters]`
 
 Examples:
 | Example | howto |
 | -- | -- |
- Remove 'a' and 'c' of "ababcb" -> "bbb" | ```mt sRem ababcb -ac``` |
+ Remove 'a' and 'c' of "ababcb" -> "bbb" | `mt sRem ababcb -ac` |
 
-## sFont
+## lineAt
+
 Usage:
-    ```mt sFont [input] -[level]```
+    `mt lineAt -[line] [input]`
 
 Examples:
 | Example | howto |
 | -- | -- |
- Create weird font at lowest level | ```mt sFont ababcb -1``` |
- Create weird font at mid level | ```mt sFont ababcb -2``` |
- Create weird font at highest level | ```mt sFont ababcb -3``` |
+ Get 5th line | `mt lineAt -5 "ab\ncd\nef\ng\nh\nij"` |
 
-## addLineNums
-Usage:
-	```mt addLineNums [input]```
-	
-Examples:
-| Example | howto |
-| -- | -- |
- Add line numbers -> 1. a \n2. b | ```mt addLineNums a b``` |
- Add line numbers to file.txt | ```cat file.txt | mt aln > file.txt``` |
- 
