@@ -20,7 +20,7 @@ void newSeed()
     init_gen_rand((uintmax_t)time(NULL));
 }
 
-void randomPw(char **output, bool useLower, bool useUpper, bool useNum, bool useSpec, size_t maxLength)
+void randomPw(char **output, bool useLower, bool useUpper, bool useNum, bool useSpec, uint_fast32_t maxLength)
 {
     char alphabet[95];
     int alphabetLen = 0;
@@ -46,7 +46,7 @@ void randomPw(char **output, bool useLower, bool useUpper, bool useNum, bool use
     *output = malloc(maxLength);
     if (maxLength < 1)
         maxLength = 20;
-    for (size_t i = 0; i < maxLength; i++) {
+    for (uint_fast32_t i = 0; i < maxLength; i++) {
         (*output)[i] = alphabet[ranNum(0, alphabetLen - 1)];
     }
     (*output)[maxLength] = '\0';
@@ -55,7 +55,7 @@ void randomPw(char **output, bool useLower, bool useUpper, bool useNum, bool use
 void outputPw(char *options, char *lengthInput)
 {
     bool useLower = false, useUpper = false, useNum = false, useSpec = false;
-    int_fast64_t repeatCounter = 1, len = 20;
+    int_fast32_t repeatCounter = 1, len = 20;
 
     if (isdigit(lengthInput[0]))
         len = string2decimal(lengthInput);

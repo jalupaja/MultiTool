@@ -24,16 +24,16 @@ void removeHexSuffix(char **hex)
         *hex = &((*hex)[2]);
 }
 
-int_fast64_t string2decimal(char *str)
+int_fast32_t string2decimal(char *str)
 {
     if (str[0] < '0' || str[0] > '9')
         return 0;
-    int_fast64_t ret;
+    int_fast32_t ret;
     sscanf(str, "%ld", &ret);
     return ret;
 }
 
-uint_fast64_t system2decimal(char *str, short system)
+uint_fast32_t system2decimal(char *str, short system)
 {
     if (system == 2)
         removeBinarySuffix(&str);
@@ -41,9 +41,9 @@ uint_fast64_t system2decimal(char *str, short system)
         removeOctalSuffix(&str);
     else if (system == 16)
         removeHexSuffix(&str);
-    uint_fast64_t ret = 0;
+    uint_fast32_t ret = 0;
     uint_fast32_t multi = 1;
-    uint_fast32_t i = strlen(str);
+    size_t i = strlen(str);
     while (i > 0) {
         if (str[i - 1] >= '0' && str[i - 1] <= '9')
             ret += (str[i - 1] - 48) * multi;
@@ -82,9 +82,9 @@ void binary2octal(char *binary, char **octal)
     removeBinarySuffix(&binary);
     char subString[4];
     subString[3] = '\0';
-    uint_fast32_t binLen = strlen(binary);
-    uint_fast8_t octalLen = (binLen / 3) + 1;
-    uint_fast8_t i = 0;
+    size_t binLen = strlen(binary);
+    size_t octalLen = (binLen / 3) + 1;
+    size_t i = 0;
     short sub = (binLen % 3) ? (3 - binLen % 3) : 0;
     if (sub) {
         *octal = malloc(++octalLen);
@@ -101,7 +101,7 @@ void binary2octal(char *binary, char **octal)
     }
 }
 
-uint_fast64_t binary2decimal(char *binary)
+uint_fast32_t binary2decimal(char *binary)
 {
     return system2decimal(binary, 2);
 }
@@ -111,9 +111,9 @@ void binary2hex(char *binary, char **hex)
     removeBinarySuffix(&binary);
     char subString[5];
     subString[4] = '\0';
-    uint_fast32_t binLen = strlen(binary);
-    uint_fast8_t hexLen = (binLen / 4) + 1;
-    uint_fast8_t i = 0;
+    size_t binLen = strlen(binary);
+    size_t hexLen = (binLen / 4) + 1;
+    size_t i = 0;
     short sub = (binLen % 4) ? (4 - binLen % 4) : 0;
     if (sub) {
         *hex = malloc(++hexLen);
@@ -148,7 +148,7 @@ void singleOctalchar2binary(char octal, char **binary)
 void octal2binary(char *octal, char **binary)
 {
     removeOctalSuffix(&octal);
-    uint_fast32_t octalLen = strlen(octal);
+    size_t octalLen = strlen(octal);
     *binary = malloc(octalLen * 3 + 1);
     (*binary)[octalLen * 3] = '\0';
     char *addBinary = malloc(4);
@@ -173,7 +173,7 @@ void octal2binary(char *octal, char **binary)
     free(addBinary);
 }
 
-uint_fast64_t octal2decimal(char *octal)
+uint_fast32_t octal2decimal(char *octal)
 {
     return system2decimal(octal, 8);
 }
@@ -188,7 +188,7 @@ char octal2char(char *octal)
     return (char)octal2decimal(octal);
 }
 
-void decimal2binary(uint64_t decimal, char **binary)
+void decimal2binary(uint_fast32_t decimal, char **binary)
 {
     if (!decimal) {
         *binary = malloc(2);
@@ -207,7 +207,7 @@ void decimal2binary(uint64_t decimal, char **binary)
     (*binary)[j] = '\0';
 }
 
-void decimal2octal(uint64_t decimal, char **octal)
+void decimal2octal(uint_fast32_t decimal, char **octal)
 {
     char *binary = NULL;
     decimal2binary(decimal, &binary);
@@ -215,7 +215,7 @@ void decimal2octal(uint64_t decimal, char **octal)
     /* !!!TODO!!!: free(binary);*/
 }
 
-void decimal2hex(uint64_t decimal, char **hex)
+void decimal2hex(uint_fast32_t decimal, char **hex)
 {
     char *binary = NULL;
     decimal2binary(decimal, &binary);
@@ -247,7 +247,7 @@ void singleHexchar2binary(char hex, char **binary)
 void hex2binary(char *hex, char **binary)
 {
     removeHexSuffix(&hex);
-    uint_fast32_t hexLen = strlen(hex);
+    size_t hexLen = strlen(hex);
     *binary = malloc(hexLen * 4 + 1);
     (*binary)[hexLen * 4] = '\0';
     char *addBinary = malloc(5);
@@ -277,7 +277,7 @@ void hex2octal(char *hex, char **octal)
     decimal2octal(system2decimal(hex, 16), octal);
 }
 
-uint_fast64_t hex2decimal(char *hex)
+uint_fast32_t hex2decimal(char *hex)
 {
     return system2decimal(hex, 16);
 }
@@ -289,21 +289,21 @@ char hex2char(char *hex)
 
 void char2binary(char character, char **binary)
 {
-    decimal2binary((uint64_t)character, binary);
+    decimal2binary((uint_fast32_t)character, binary);
 }
 
 void char2octal(char character, char **octal)
 {
     char *binary = NULL;
-    decimal2binary((uint64_t)character, &binary);
+    decimal2binary((uint_fast32_t)character, &binary);
     binary2octal(binary, &(*octal));
 
     /*!!!TODO!!! free(binary);*/
 }
 
-uint_fast64_t char2decimal(char character)
+uint_fast32_t char2decimal(char character)
 {
-    return (uint_fast64_t)character;
+    return (uint_fast32_t)character;
 }
 
 void char2hex(char character, char **hex)

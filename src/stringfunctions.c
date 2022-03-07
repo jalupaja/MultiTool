@@ -1,5 +1,6 @@
 #include "stringfunctions.h"
 #include <ctype.h>
+#include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -67,22 +68,22 @@ void stringReverse(char *string, char **output)
     (*output)[strLen] = '\0';
 }
 
-void outputStringTimes(char *string, size_t times)
+void outputStringTimes(char *string, uint_fast32_t times)
 {
-    for (size_t i = 0; i < times; i++)
+    for (uint_fast32_t i = 0; i < times; i++)
         printf("%s", string);
     printf("\n");
 }
 
-void stringTimes(char *string, size_t times, char **output)
+void stringTimes(char *string, uint_fast32_t times, char **output)
 {
     size_t strLen = strlen(string);
     *output = malloc(strLen * times + 1);
-    for (size_t i = 0; i < times; i++)
+    for (uint_fast32_t i = 0; i < times; i++)
         strncpy(&((*output)[i * strLen]), string, strLen);
 }
 
-void outputStringSplitNum(char *string, size_t num)
+void outputStringSplitNum(char *string, uint_fast32_t num)
 {
     if (num < 1) {
         printf("%s\n", string);
@@ -180,7 +181,7 @@ void stringRemove(char *string, char *toRemove, char **output)
     }
 }
 
-void outputLineAt(char *string, size_t line)
+void outputLineAt(char *string, uint_fast32_t line)
 {
     if (line < 1) {
         printf("\n");

@@ -1,6 +1,5 @@
 *.out
+*.exe
 build
 bin
-Makefile_own_NOT_FINISHED
-example_makefile
 mt

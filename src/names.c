@@ -8,10 +8,10 @@
 #include <stdlib.h>
 #include <string.h>
 
-size_t getFileSize(FILE *file)
+uint_fast32_t getFileLength(FILE *file)
 {
     if (file != NULL) {
-        size_t fSize = 0;
+        uint_fast32_t fSize = 0;
         char ch;
         do {
             ch = fgetc(file);
@@ -24,13 +24,13 @@ size_t getFileSize(FILE *file)
     }
 }
 
-void getRandomLine(char *line, size_t maxLen, FILE *file, size_t fSize)
+void getRandomLine(char *line, uint_fast32_t maxLen, FILE *file, uint_fast32_t fSize)
 {
     line[0] = '\0';
     rewind(file);
     if (file != NULL) {
-        size_t fIndex = ranNum(1, fSize);
-        for (size_t i = 0; i < fIndex; i++) {
+        uint_fast32_t fIndex = ranNum(1, fSize);
+        for (uint_fast32_t i = 0; i < fIndex; i++) {
             fgets(line, maxLen, file);
         }
         line[strlen(line) - 1] = '\0';
@@ -61,7 +61,7 @@ void outputRandomName(char *options, char *path)
 
     /* OPTIONS */
     size_t optLen = strlen(options);
-    size_t repeatCounter = 1, minLength = 3, maxLength = 20;
+    uint_fast32_t repeatCounter = 1, minLength = 3, maxLength = 20;
     char wordCase = 'n';
 
     for (size_t i = 0; i < optLen; i++) {
@@ -95,12 +95,12 @@ void outputRandomName(char *options, char *path)
 
     char one[60];
     char two[60];
-    size_t fSize1 = getFileSize(file1);
-    size_t fSize2 = getFileSize(file2);
+    uint_fast32_t fSize1 = getFileLength(file1);
+    uint_fast32_t fSize2 = getFileLength(file2);
 
-    size_t currentSize;
+    uint_fast32_t currentSize;
 
-    for (size_t i = 0; i < repeatCounter; i++) {
+    for (uint_fast32_t i = 0; i < repeatCounter; i++) {
         do {
             getRandomLine(one, sizeof one, file1, fSize1);
             currentSize = strlen(one);
