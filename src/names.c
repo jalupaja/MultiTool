@@ -1,6 +1,6 @@
 #include "names.h"
-#include "config.h"
 #include "colorOutput.h"
+#include "config.h"
 #include "converters.h"
 #include "random.h"
 #include <ctype.h>

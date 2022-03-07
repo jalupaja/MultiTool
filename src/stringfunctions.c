@@ -192,7 +192,7 @@ void outputLineAt(char *string, uint_fast32_t line)
     while (1) {
         if (--line > 0) {
             ptr = nextS + 1;
-            nextS = strchr(ptr , '\n'); 
+            nextS = strchr(ptr, '\n');
         } else if (nextS != NULL) {
             break;
         } else {

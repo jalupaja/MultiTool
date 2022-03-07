@@ -1,8 +1,8 @@
 #include "converters.h"
-#include "random.h"
 #include "names.h"
+#include "random.h"
 #include "stringfunctions.h"
-#include <stdbool.h> 
+#include <stdbool.h>
 #include <stdio.h>
 #include <string.h>
 #include <unistd.h>

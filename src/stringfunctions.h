@@ -1,8 +1,8 @@
 #ifndef STRINGFUNCTIONS_H
 #define STRINGFUNCTIONS_H
 
-#include <stdlib.h>
 #include <stdint.h>
+#include <stdlib.h>
 
 void outputStringLen(char *);
 size_t stringLen(char *);

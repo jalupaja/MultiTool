@@ -1,14 +1,14 @@
 #include "random.h"
+#include "SFMT/SFMT.h"
 #include "converters.h"
 #include <ctype.h>
+#include <limits.h>
 #include <stdbool.h>
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
-#include "SFMT/SFMT.h"
-#include <limits.h>
 
 int_fast32_t ranNum(int_fast32_t min, int_fast32_t max)
 {

@@ -1,9 +1,9 @@
 #ifndef RANDOM_H
 #define RANDOM_H
 
-#include <stdlib.h>
 #include <stdbool.h>
 #include <stdint.h>
+#include <stdlib.h>
 
 int_fast32_t ranNum(int_fast32_t, int_fast32_t);
 
