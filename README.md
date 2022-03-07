@@ -33,7 +33,7 @@ A multi-Platform multi-Functional tool written in C
  [sRem](#srem) | Remove Specific characters of string |
  [lineAt](#lineat) | Output only the line at the given number |
 
-This tool doe's not yet allow input via pipe symbol("|"). The input will function as read as the last argument!
+This tool allows input via pipe symbol("|"). The input will function as read as the last argument!
 
 # Options
 
