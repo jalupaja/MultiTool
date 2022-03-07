@@ -7,17 +7,17 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
+#include "SFMT/SFMT.h"
+#include <limits.h>
 
-size_t ranNum(size_t min, size_t max)
+int_fast32_t ranNum(int_fast32_t min, int_fast32_t max)
 {
-    /* TODO: should be a lot better, needs a different seed on startup*/
-    return min + (long)(max * (rand() / (RAND_MAX + 1.0)));
+    return gen_rand64() % (max + 1 - min) + min;
 }
 
 void newSeed()
 {
-    /* TODO same here ^^ */
-    srand((uintmax_t)time(NULL));
+    init_gen_rand((uintmax_t)time(NULL));
 }
 
 void randomPw(char **output, bool useLower, bool useUpper, bool useNum, bool useSpec, size_t maxLength)

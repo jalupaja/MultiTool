@@ -1,7 +1,7 @@
 #ifndef COLOROUTPUT_H
 #define COLOROUTPUT_H
 
-#define DEFAULT         "\033[1;0m"
+#define DEFAULT_COLOR   "\033[1;0m"
 #define BLACK           "\033[0;30m"
 #define RED             "\033[0;31m"
 #define GREEN           "\033[0;32m"

@@ -3,8 +3,9 @@
 
 #include <stdlib.h>
 #include <stdbool.h>
+#include <stdint.h>
 
-size_t ranNum(size_t, size_t);
+int_fast32_t ranNum(int_fast32_t, int_fast32_t);
 
 void newSeed();
 
